@@ -3,13 +3,17 @@ from models import db, Movilidad, Convenios, ConveniosInstituciones, Extension, 
 from config import Config
 import csv
 
-app = Flask(__name__)
-app.config.from_object(Config)
-db.init_app(app)
 
-# Crear todas las tablas en la base de datos (solo la primera vez)
-with app.app_context():
-    db.create_all()
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    db.init_app(app)
+
+    # Crear todas las tablas en la base de datos (solo la primera vez)
+    with app.app_context():
+        db.create_all()
+
+    return app
 
 @app.route("/")
 def index():
