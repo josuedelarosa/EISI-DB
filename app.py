@@ -120,24 +120,48 @@ def create_app(config_class=Config):
     @app.route("/extension", methods=["GET", "POST"])
     def extension():
         if request.method == "POST":
-            nombre = request.form["nombre"]
-            objeto = request.form["objeto"]
-            extension_anos = request.form["extension_anos"]
+            nombre = request.form.get("nombre")
+            objeto = request.form.get("objeto")
+            extension_anos_id = request.form.get("extension_anos")  # Renombrado para claridad
 
-    
+            # Validaciones básicas
+            if not nombre or not objeto or not extension_anos_id:
+                flash("Todos los campos son obligatorios.")
+                return redirect(url_for("extension"))
+
+            # Verificar si 'extension_anos_id' es un ID válido en ExtensionAnos
+            try:
+                extension_anual_id = int(extension_anos_id)
+            except ValueError:
+                flash("El campo Extensión Años debe ser un número válido.")
+                return redirect(url_for("extension"))
+
+            extension_anual = ExtensionAnos.query.get(extension_anual_id)
+            if not extension_anual:
+                flash("Año de Extensión no válido.")
+                return redirect(url_for("extension"))
+
             nueva_extension = Extension(
                 nombre=nombre,
                 objeto=objeto,
-                extension_anos=extension_anos
+                extension_anual_id=extension_anual_id  # Correcto
             )
-            db.session.add(nueva_extension)
-            db.session.commit()
-            flash("Extensión añadida correctamente.")
+
+            try:
+                db.session.add(nueva_extension)
+                db.session.commit()
+                flash("Extensión añadida correctamente.")
+            except Exception as e:
+                db.session.rollback()
+                flash("Error al añadir la Extensión. Por favor, intenta de nuevo.")
+                print(f"Error al añadir Extensión: {e}")  # Para depuración
+
             return redirect(url_for("extension"))
-    
+
         registros = Extension.query.all()
         extension_anos = ExtensionAnos.query.all()
         return render_template("extension.html", extension=registros, extension_anos=extension_anos)
+
     
     # Ruta para Extensión_Años
     @app.route("/extension_anos", methods=["GET", "POST"])

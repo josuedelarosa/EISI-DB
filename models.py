@@ -38,7 +38,7 @@ class Extension(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(200), nullable=False)
     objeto = db.Column(db.Text)
-    extension_anual_id = db.Column(db.Integer, db.ForeignKey('extension_anos.id', ondelete="CASCADE"))
+    extension_anual_id = db.Column(db.Integer, db.ForeignKey('extension_anos.id', ondelete="CASCADE"), nullable=False)
 
     extension_anos = db.relationship("ExtensionAnos", backref="extensiones")
 

@@ -14,7 +14,13 @@
     <form method="POST">
         <label>Nombre:</label><input type="text" name="nombre" required><br>
         <label>Objeto:</label><input type="text" name="objeto" required><br>
-        <label>Extensión Años:</label><input type="number" name="extension_anos" required><br>
+        <label>Extensión Años:</label>
+        <select name="extension_anos" required>
+            <option value="" disabled selected>Selecciona un Año de Extensión</option>
+            {% for ano in extension_anos %}
+                <option value="{{ ano.id }}">{{ ano.ano }}</option>
+            {% endfor %}
+        </select><br>
         <button type="submit">Añadir</button>
     </form>
 </div>
