@@ -48,7 +48,7 @@ class Movilidad(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100))
     apellido = db.Column(db.String(100))
-    identificacion = db.Column(db.String(50), unique=True)
+    identificacion = db.Column(db.String(50))
     tipo_identificacion = db.Column(db.String(50))
     tipo_persona = db.Column(db.String(50))  # Estudiante o Profesor
     institucion_destino = db.Column(db.String(200))
