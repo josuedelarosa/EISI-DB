@@ -122,12 +122,13 @@ def create_app(config_class=Config):
         if request.method == "POST":
             nombre = request.form["nombre"]
             objeto = request.form["objeto"]
-            extension_anual_id = request.form["extension_anual_id"]
+            extension_anos = request.form["extension_anos"]
+
     
             nueva_extension = Extension(
                 nombre=nombre,
                 objeto=objeto,
-                extension_anual_id=extension_anual_id
+                extension_anos=extension_anos
             )
             db.session.add(nueva_extension)
             db.session.commit()

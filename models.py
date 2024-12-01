@@ -40,7 +40,7 @@ class Extension(db.Model):
     objeto = db.Column(db.Text)
     extension_anual_id = db.Column(db.Integer, db.ForeignKey('extension_anos.id', ondelete="CASCADE"))
 
-    extension_ano = db.relationship("ExtensionAnos", backref="extensiones")
+    extension_anos = db.relationship("ExtensionAnos", backref="extensiones")
 
 # Tabla: Movilidad
 class Movilidad(db.Model):
