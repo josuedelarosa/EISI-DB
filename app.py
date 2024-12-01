@@ -114,7 +114,7 @@ def create_app(config_class=Config):
             return redirect(url_for("convenios_instituciones"))
     
         registros = ConveniosInstituciones.query.all()
-        return render_template("convenios_instituciones.html", instituciones=registros)
+        return render_template("convenios_instituciones.html", convenios_instituciones=registros)
     
     # Ruta para Extensión
     @app.route("/extension", methods=["GET", "POST"])
