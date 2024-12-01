@@ -12,9 +12,20 @@
 <!-- Contenido de la Pestaña: Formulario -->
 <div id="Formulario" class="tab-content" style="display: block;">
     <form method="POST">
-        <label>Nombre:</label><input type="text" name="nombre" required><br>
-        <label>Objeto:</label><input type="text" name="objeto" required><br>
-        <label>Extensión Años:</label><input type="number" name="extension_anos" required><br>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required><br>
+
+        <label>Objeto:</label>
+        <input type="text" name="objeto" required><br>
+
+        <label>Extensión Años:</label>
+        <select name="extension_anual_id" required>
+            <option value="" disabled selected>Selecciona un Año de Extensión</option>
+            {% for ano in extension_anos %}
+                <option value="{{ ano.id }}">{{ ano.ano }}</option>
+            {% endfor %}
+        </select><br>
+
         <button type="submit">Añadir</button>
     </form>
 </div>
@@ -35,7 +46,7 @@
             <tr>
                 <td>{{ item.nombre }}</td>
                 <td>{{ item.objeto }}</td>
-                <td>{{ item.extension_anos }}</td>
+                <td>{{ item.extension_anos.ano }}</td> <!-- Asumiendo que hay una relación definida -->
             </tr>
             {% endfor %}
         </tbody>
@@ -46,5 +57,6 @@
         <a href="{{ url_for('descargar_csv', tabla='extension') }}" class="btn btn-primary">Descargar CSV</a>
     </div>
 </div>
+
 
 {% endblock %}
