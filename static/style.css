@@ -1,0 +1,205 @@
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+nav {
+    text-align: center;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* Contenedor principal */
+main {
+    max-width: 1000px;  /* Aumentado de 600px a 1000px para mayor amplitud */
+    width: 100%;
+    margin: 40px auto; /* Centrado horizontalmente */
+    background: #fff;
+    padding: 30px; /* Espacio para airear el contenido */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Asegura que todo el contenido esté centrado horizontalmente */
+    justify-content: center;
+}
+
+/* Formularios */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar elementos del formulario */
+    gap: 20px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%;
+    max-width: 600px; /* Mantener el ancho del contenido centrado */
+}
+
+form input, form select, form textarea {
+    padding: 12px; /* Aumentado para hacerlo más cómodo de interactuar */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 600px; /* Ajuste para formularios amplios */
+    margin-bottom: 5px;
+}
+
+button {
+    width: 160px;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    max-width: 800px; /* Limitar el ancho máximo de la tabla */
+    border-collapse: collapse;
+    margin: 30px auto; /* Centrar la tabla en la página */
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 15px; /* Aumentado para mejor lectura */
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+}
+
+td {
+    background-color: #fafafa;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Mensajes de éxito */
+ul {
+    list-style: none;
+    background-color: #e6f7e6;
+    border: 1px solid #a3e1a3;
+    padding: 15px; /* Más espacio alrededor */
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+ul li {
+    color: #4CAF50;
+}
+
+/* Mejorar la apariencia del formulario y la tabla */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px; /* Espacio más grande para mejor división visual */
+}
+
+table {
+    margin-top: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+form button {
+    align-self: flex-start;
+    margin-top: 20px; /* Espacio adicional entre el botón y el formulario */
+}
+
+/* Padding para secciones específicas */
+section {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+
+
+/* Estilos para las Pestañas */
+.tabs {
+    overflow: hidden;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;  /* Asegurarse de que las pestañas ocupen todo el ancho */
+}
+
+.tab-link {
+    background-color: #333;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    flex-grow: 1; /* Para que las pestañas se distribuyan equitativamente */
+    max-width: 500px;  /* Limitar el tamaño máximo */
+}
+
+.tab-link:hover {
+    background-color: #555;
+}
+
+.tab-link.active {
+    background-color: #444;
+}
+
+.tab-content {
+    padding: 30px;  /* Aumentar el padding para más espacio */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;  /* Asegurarse de que el contenido de la pestaña ocupe el ancho */
+    max-width: 800px;  /* Limitar el ancho máximo para que no sea demasiado ancho */
+    margin: 0 auto;  /* Centrar el contenido */
+}

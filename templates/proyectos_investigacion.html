@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Proyectos de Investigación</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Nombre del Proyecto:</label><input type="text" name="proyecto_nombre" required><br>
+        <label>Año de Inicio:</label><input type="number" name="ano_inicio"><br>
+        <label>Estado:</label><input type="text" name="estado"><br>
+        <label>Fecha de Finalización:</label><input type="date" name="fecha_finalizacion"><br>
+        <label>Publicaciones:</label><textarea name="publicaciones"></textarea><br>
+        <label>Aplicaciones Derivadas:</label><textarea name="aplicaciones_derivadas"></textarea><br>
+        <label>Entidad Financiadora:</label><input type="text" name="entidad_financiadora"><br>
+        <label>Investigador Principal:</label><input type="text" name="investigador_principal"><br>
+        <label>Autores:</label><textarea name="autores"></textarea><br>
+        <label>Tipo de Fuente de Financiación:</label><input type="text" name="tipo_fuente_financiacion"><br>
+        <label>Fuente de Financiación:</label><input type="text" name="fuente_financiacion"><br>
+        <label>Observaciones:</label><textarea name="observaciones"></textarea><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Proyectos de Investigación</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Proyecto</th>
+                <th>Año de Inicio</th>
+                <th>Estado</th>
+                <th>Investigador Principal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in proyectos %}
+            <tr>
+                <td>{{ item.proyecto_nombre }}</td>
+                <td>{{ item.ano_inicio }}</td>
+                <td>{{ item.estado }}</td>
+                <td>{{ item.investigador_principal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv', tabla='proyectos_investigacion') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

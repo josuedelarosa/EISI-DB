@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Movilidad</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Nombre:</label><input type="text" name="nombre" required><br>
+        <label>Apellido:</label><input type="text" name="apellido" required><br>
+        <label>Identificación:</label><input type="text" name="identificacion" required><br>
+        <label>Tipo de Persona:</label>
+        <select name="tipo_persona">
+            <option value="estudiante">Estudiante</option>
+            <option value="profesor">Profesor</option>
+        </select><br>
+        <label>Institución Destino:</label><input type="text" name="institucion_destino"><br>
+        <label>País:</label><input type="text" name="pais"><br>
+        <label>Tipo de Estadia:</label><input type="text" name="tipo_estadia"><br>
+        <label>Fecha Inicio:</label><input type="date" name="fecha_inicio"><br>
+        <label>Fecha Fin:</label><input type="date" name="fecha_fin"><br>
+        <label>Movilidad Tipo:</label>
+        <select name="movilidad_tipo">
+            <option value="entrante">Entrante</option>
+            <option value="saliente">Saliente</option>
+        </select><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <!-- Formulario de Filtrado -->
+    <h3>Filtrar Registros de Movilidad</h3>
+    <form method="GET" action="{{ url_for('movilidad') }}">
+        <label for="tipo_persona">Filtrar por Tipo de Persona:</label>
+        <select id="tipo_persona" name="tipo_persona">
+            <option value="">Todos</option>
+            <option value="estudiante" {% if tipo_persona == 'estudiante' %}selected{% endif %}>Estudiante</option>
+            <option value="profesor" {% if tipo_persona == 'profesor' %}selected{% endif %}>Profesor</option>
+        </select>
+        <button type="submit">Aplicar Filtro</button>
+    </form>
+
+    <!-- Tabla de Resultados de Movilidad -->
+    <h3>Registros de Movilidad</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo de Persona</th>
+                <th>Institución Destino</th>
+                <th>País</th>
+                <th>Movilidad Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in movilidades %}
+            <tr>
+                <td>{{ item.nombres }}</td>
+                <td>{{ item.apellidos }}</td>
+                <td>{{ item.tipo_persona }}</td>
+                <td>{{ item.institucion_destino }}</td>
+                <td>{{ item.pais }}</td>
+                <td>{{ item.movilidad_tipo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv_filtrado', tipo_persona=tipo_persona if tipo_persona else '') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

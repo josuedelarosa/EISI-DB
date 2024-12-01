@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Instituciones</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Nombre Institución:</label><input type="text" name="nombre_institucion" required><br>
+        <label>País:</label><input type="text" name="pais" required><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Instituciones</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Institución</th>
+                <th>País</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in convenios_instituciones %}
+            <tr>
+                <td>{{ item.nombre_institucion }}</td>
+                <td>{{ item.pais }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv_filtrado', tabla='convenios_instituciones') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

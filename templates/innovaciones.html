@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Innovaciones</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Autores:</label><textarea name="autores" required></textarea><br>
+        <label>Innovación:</label><textarea name="innovacion" required></textarea><br>
+        <label>Beneficiarios:</label><textarea name="beneficiarios"></textarea><br>
+        <label>Aplicación Efectiva:</label><textarea name="aplicacion_efectiva"></textarea><br>
+        <label>Año:</label><input type="number" name="ano"><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Innovaciones</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Autores</th>
+                <th>Innovación</th>
+                <th>Año</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in innovaciones %}
+            <tr>
+                <td>{{ item.autores }}</td>
+                <td>{{ item.innovacion }}</td>
+                <td>{{ item.ano }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv', tabla='innovaciones') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

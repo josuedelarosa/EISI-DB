@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Convenios</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Tipo de Convenio:</label><input type="text" name="tipo_convenio" required><br>
+        <label>Objeto:</label><textarea name="objeto"></textarea><br>
+        <label>Resultado:</label><textarea name="resultado"></textarea><br>
+        <label>Detalles Vigencia:</label><textarea name="detalles_vigencia"></textarea><br>
+        <label>Institución:</label>
+        <select name="institucion_id">
+            {% for institucion in instituciones %}
+            <option value="{{ institucion.id }}">{{ institucion.nombre_institucion }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Fecha Inicio:</label><input type="date" name="fecha_inicio"><br>
+        <label>Fecha Fin:</label><input type="date" name="fecha_fin"><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Convenios</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo de Convenio</th>
+                <th>Objeto</th>
+                <th>Resultado</th>
+                <th>Institución</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in convenios %}
+            <tr>
+                <td>{{ item.tipo_convenio }}</td>
+                <td>{{ item.objeto }}</td>
+                <td>{{ item.resultado }}</td>
+                <td>{{ item.institucion.nombre_institucion }}</td>
+                <td>{{ item.fecha_inicio }}</td>
+                <td>{{ item.fecha_fin }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv', tabla='convenios') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

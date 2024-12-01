@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Años de Extensión</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Año:</label><input type="number" name="ano" required><br>
+        <label>Número de Profesores:</label><input type="number" name="num_profesores"><br>
+        <label>Número de Estudiantes:</label><input type="number" name="num_estudiantes"><br>
+        <label>Población Atendida:</label><input type="number" name="poblacion_atendida"><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Años de Extensión</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Año</th>
+                <th>Número de Profesores</th>
+                <th>Número de Estudiantes</th>
+                <th>Población Atendida</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in extension_anos %}
+            <tr>
+                <td>{{ item.ano }}</td>
+                <td>{{ item.num_profesores }}</td>
+                <td>{{ item.num_estudiantes }}</td>
+                <td>{{ item.poblacion_atendida }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv', tabla='extension_anos') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

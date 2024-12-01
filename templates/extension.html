@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Extensión</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Nombre:</label><input type="text" name="nombre" required><br>
+        <label>Objeto:</label><input type="text" name="objeto" required><br>
+        <label>Extensión Años:</label><input type="number" name="extension_anos" required><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Extensión</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Objeto</th>
+                <th>Extensión Años</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in extension %}
+            <tr>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.objeto }}</td>
+                <td>{{ item.extension_anos }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv_filtrado', tabla='extension') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestión de Grupos de Investigación</h2>
+
+<!-- Contenedor de Pestañas -->
+<div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'Formulario')">Formulario</button>
+    <button class="tab-link" onclick="openTab(event, 'Mostrar')">Mostrar Registros</button>
+</div>
+
+<!-- Contenido de la Pestaña: Formulario -->
+<div id="Formulario" class="tab-content" style="display: block;">
+    <form method="POST">
+        <label>Nombre del Grupo:</label><input type="text" name="nombre_grupo" required><br>
+        <label>Clasificación:</label><input type="text" name="clasificacion"><br>
+        <label>Código:</label><input type="text" name="codigo"><br>
+        <label>Líneas de Investigación:</label><textarea name="lineas_investigacion"></textarea><br>
+        <label>Proyectos con Recursos Públicos:</label><input type="number" name="proyectos_recursos_publicos"><br>
+        <label>Proyectos con Recursos Privados:</label><input type="number" name="proyectos_recursos_privados"><br>
+        <label>Artículos en Revistas Indexadas:</label><input type="number" name="articulos_revistas_indexadas"><br>
+        <label>Artículos en Revistas no Indexadas:</label><input type="number" name="articulos_revistas_no_indexadas"><br>
+        <label>Libros o Capítulos:</label><input type="number" name="libros_capitulos"><br>
+        <label>Patentes:</label><input type="number" name="patentes"><br>
+        <label>Productos de Creación:</label><input type="number" name="productos_creacion"><br>
+        <label>Productos Totales:</label><input type="number" name="productos_totales"><br>
+        <label>Estudiantes Vinculados:</label><input type="number" name="estudiantes_vinculados"><br>
+        <label>Profesores Vinculados:</label><input type="number" name="profesores_vinculados"><br>
+        <button type="submit">Añadir</button>
+    </form>
+</div>
+
+<!-- Contenido de la Pestaña: Mostrar Registros -->
+<div id="Mostrar" class="tab-content" style="display: none;">
+    <h3>Registros de Grupos de Investigación</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Grupo</th>
+                <th>Clasificación</th>
+                <th>Código</th>
+                <th>Líneas de Investigación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in grupos %}
+            <tr>
+                <td>{{ item.nombre_grupo }}</td>
+                <td>{{ item.clasificacion }}</td>
+                <td>{{ item.codigo }}</td>
+                <td>{{ item.lineas_investigacion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para Descargar CSV -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('descargar_csv', tabla='grupos_investigacion') }}" class="btn btn-primary">Descargar CSV</a>
+    </div>
+</div>
+
+{% endblock %}

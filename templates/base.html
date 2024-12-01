@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema EISI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;  
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: auto;  
+        }
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .footer-content img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <img src="/static/logo_escuela.png" alt="Logo Escuela" style="width: 60px; height: auto;">
+                <h1>Sistema de Gestión EISI</h1>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}">Inicio</a>
+                <a href="{{ url_for('movilidad') }}">Movilidad</a>
+                <a href="{{ url_for('convenios') }}">Convenios</a>
+                <a href="{{ url_for('convenios_instituciones') }}">Instituciones</a>
+                <a href="{{ url_for('extension') }}">Extensión</a>
+                <a href="{{ url_for('extension_anos') }}">Años de Extensión</a>
+                <a href="{{ url_for('proyectos_investigacion') }}">Proyectos de Investigación</a>
+                <a href="{{ url_for('innovaciones') }}">Innovaciones</a>
+                <a href="{{ url_for('grupos_investigacion') }}">Grupos de Investigación</a>
+            </nav>
+        </header>
+        <main>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <img src="/static/logo_uis.png" alt="Logo UIS">
+        </div>
+    </footer>
+
+    <script>
+        function openTab(event, tabName) {
+            // Ocultar todo el contenido de las pestañas
+            var tabContent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+        
+            // Eliminar la clase "active" de todos los botones de pestañas
+            var tabLinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+            }
+        
+            // Mostrar el contenido de la pestaña actual y añadir la clase "active"
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.className += " active";
+        }
+        </script>
+
+</body>
+</html>
